@@ -1,4 +1,5 @@
-# Text-to-Image Generation Integration
+#texttoimage-generation-integration
+
 
 This project is a simple web application that allows users to upload an image (in JPG format) and generate a caption for it using the Hugging Face `Salesforce/blip-image-captioning-large` model. The application is built with Streamlit.
 
