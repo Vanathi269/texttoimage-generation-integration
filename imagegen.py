@@ -8,7 +8,10 @@ headers = {"Authorization": "Bearer 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"}
 
 heading_color = "#261b63"
 st.markdown(f"<h1 style='text-align: center; color: {heading_color};'>Welcome to Image Generation Application</h1>", unsafe_allow_html=True)
-st.markdown(f"<h3 style='text-align: center; color: {heading_color};'>Will Explore the world in hand......</h3>", unsafe_allow_html=True)
+st.markdown(f"<h3 style='text-align: center; color: {heading_color};'>Will Explore the world in hand...</h3>", unsafe_allow_html=True)
+
+# Prompting bar
+prompt = st.text_input('Enter a prompt to generate an image:')
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -19,13 +22,12 @@ def query(payload):
         return None
 
 if st.button('Generate'):
-    prompt = st.text_input('Enter Prompt')
     if prompt:
         image_bytes = query({"inputs": prompt})
         if image_bytes:
             try:
                 image = Image.open(io.BytesIO(image_bytes))
-                st.image(image)
+                st.image(image, caption="Generated Image")
             except UnidentifiedImageError:
                 st.error("Failed to generate image. Please try again with a different prompt.")
         else:
